@@ -1,0 +1,14 @@
+
+
+givet en graph hvor all edges er verticalt og horizontalt forbundet.
+her skal du finde ud af hvordan man blokkere grafen så den er delt
+i to ved hjælp af sikkerheds vagter.
+
+der er også  søjler som kan hjælpe vagter med at blockere sectioner.
+
+opgaven består af at finder ud af hvormange vagter 
+skal bruges og hvor de skal stå
+
+mulig løsning:
+først find max flow det er vagter. 
+der efter find mincut af grafen og brug den til at finde deres poster
