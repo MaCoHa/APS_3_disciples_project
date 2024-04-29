@@ -1,6 +1,4 @@
-n = 2016
-rest = 3*(n-1)
+n = 2000
 print(n)
-print("1 {} {} {}".format(rest//4, rest//4*2, rest//4))
-for _ in range(n-1):
-    print("1 1 1 1")
+for _ in range(n):
+    print("1 0 0 {}".format(10**9//n))
