@@ -1,0 +1,28 @@
+# Checklist Is the following included: 
+- [x] Problem Description 
+- Thanks for the PDF 
+- [x] Accepted solution(s) 
+- Python file missing a shebang (`#!/usr/bin/env python3`) 
+- [x] Wrong solution(s) 
+- Python files missing shebangs (`#!/usr/bin/env python3`) 
+- [x] Sample/secret test inputs 
+- [x] Input Validation 
+- Slight issues. See below. 
+
+Does `verifyproblem .` work? Yes, if adding shebangs to the Python files.
+
+Optional: 
+- [ ] Test groups for scoring 
+- [ ] Partially accepted solutions 
+
+## Short summary feedback Summary of problem: 
+- Given N drinks, find the drink with the highest alcohol-to-price ratio. 
+
+Suggestions for improvements: 
+- Your python submissions are missing shebangs (`#!/usr/bin/env python3`), so verifyproblem throws an error. 
+- I'd recommend using single-letter variable names, e.g. `u` for units of alcohol and `p` for price (currency need not be specified). 
+- You should specify when using 0-based indexing. In this case, I would not have used indices at all, and have given the drinks unique names instead, making the output be the name of the drink rather than the 0-based index.
+- You should specify upper and lower bounds all numbers. 
+- Your input format validator does not catch input swith extra text, e.g. `1\n5 6text`. 
+
+## Verdict Passed: Yes
