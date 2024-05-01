@@ -4,8 +4,8 @@ import sys
 
 try: 
     w,h = map(int, sys.stdin.readline().split())
-    assert 300 >= w > 2
-    assert 300 >= h > 2
+    assert 300 >= w >= 2
+    assert 300 >= h >= 2
     sources = 0
     sinks = 0
     free = 0
