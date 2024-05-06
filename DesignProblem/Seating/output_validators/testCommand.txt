@@ -1,0 +1,1 @@
+Get-Content ./output_validators/testOut.ans | python3 .\output_validators\simulate.py .\data\sample\1.in .\data\sample/1.ans .\output_validators\test_feedback_dir

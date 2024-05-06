@@ -4,3 +4,4 @@ rights_owner: authors
 license: cc by-sa
 limits:
     time_multiplier: 3
+validation: custom

@@ -1,0 +1,22 @@
+WA: Invalid command
+WA: Invalid command
+WA: Submission produces empty output
+WA: Submission produces empty output
+WA: Invalid command
+WA: Invalid command
+WA: Incurrent flow level
+WA: Incorrent flow level
+WA: Incorrent flow level
+WA: Incorrent flow level
+WA: Incorrent flow level
+WA: Incorrent flow level
+WA: Incorrent flow level
+WA: Incorrent flow level
+WA: Invalid first line
+WA: Invalid number of lines
+WA: Fans can still reach the sink
+WA: Fans can still reach the sink
+WA: Can not place gaurd outside stadium
+WA: Incorrent flow level
+WA: Incorrent flow level
+WA: Invalid line
