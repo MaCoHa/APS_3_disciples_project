@@ -39,47 +39,56 @@ for y_cord in range(h):
                     if (new_x_cord >= 0 and new_x_cord < w ) and (new_y_cord >= 0 and new_y_cord < h):
                         graph[(x_cord,y_cord,OUT)][(new_x_cord,new_y_cord, IN)] = 1
 
-def bfs(graph):
-    queue = [(source, [source], float("inf"))]
-    visited = [source]
-    
-    while queue:
-        node, path, cur_flow = queue.pop(0)
-        adj_nodes = graph[node]
-        for adj_node, capacity in adj_nodes.items():
-            if adj_node not in visited and capacity > 0:
-                flow = min(capacity, cur_flow)
-                queue.append((adj_node, path + [adj_node], flow))
-                visited.append(adj_node)
+#Credit Riko: https://github.itu.dk/algorithms/aps-24/blob/main/060-network-flows/code/flow.py
+def dfs(graph,u,dest,mincap,seen=set()):
+    if u in seen:
+        return (False,seen)
+    seen.add(u)
+    for v,cap in graph[u].items():
+        print(u,v,cap, mincap)
+        if cap > mincap:
+            if v == dest:
+                return (True,[(u,v)])
+            suc,p = dfs(graph,v,dest,mincap,seen)
+            print(suc)
+            if suc:
+                p.append((u,v))
+                return (True,p)
+    return (False,seen)
 
-                if adj_node == sink:
-                    return path + [sink], flow
-    
-    return ([], 0)
-
-def flow(orggraph):
-    
-    current_flow = 0
+def flow(orggraph, src,dest):
     graph = defaultdict(lambda: defaultdict(int))
+    maxcapacity = 0
     for u,d in orggraph.items():
         for v,c in d.items():
             graph[u][v] = c
+            maxcapacity = max(maxcapacity,c)
+
+    current_flow = 0
+    mincap = maxcapacity
     while True:
-        path, curFlow = bfs(graph)
-        current_flow += curFlow
-        if not path:
-            return (current_flow,
+        ispath, p_or_seen = dfs(graph,src,dest,mincap)
+        print(ispath, p_or_seen)
+        if not ispath:
+            if mincap > 0:
+                mincap = mincap // 2
+                continue
+            else:
+                return (current_flow,
                         { a:{b:c-graph[a][b] for b,c in d.items() if graph[a][b]<c} 
                             for a,d in orggraph.items() },
-                        path)
-        #saturation = min( graph[u][v] for u,v in path )
+                        p_or_seen)
+        p = p_or_seen
+        saturation = min( graph[u][v] for u,v in p )
+        current_flow += saturation
         
-        for i in range(len(path)-1):
-            u,v = path[i], path[i+1]
-            graph[u][v] -= curFlow
-            graph[v][u] += curFlow
+        
+        for u,v in p:
+            graph[u][v] -= saturation
+            graph[v][u] += saturation
 
-currentFlow, newGraph, seen = flow(graph)
+currentFlow, newGraph, seen = flow(graph, source, sink)
+print(currentFlow, newGraph, seen)
 queue = [source]
 minCut = set()
 while queue:
@@ -90,7 +99,7 @@ while queue:
             minCut.add(neighbor)
         else:
             queue.append(neighbor)
-print(currentFlow, newGraph, seen)
+        
 print("F", currentFlow)
 for node in minCut:
     print(node[0], node[1])
