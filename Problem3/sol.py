@@ -1,6 +1,6 @@
 #https://open.kattis.com/problems/worstweather?tab=metadata
 
-
+import math
 
 class SegmentTree():
     def __init__(self, n):
@@ -23,13 +23,22 @@ class SegmentTree():
     def query(self, i, j):
         lower = self.get(i)
         upper = self.get(j)
-        middle, noSkips = self.__bottom_up_range_Max(i+1, j-1)
+        if lower[0] == -1 and upper[0] == -1:
+            return "maybe"
+        
+        isLowerAndUpperKnown = lower[0]>0 and upper[0]>0
+        if lower[0] == -1:
+            lower = upper
+        if upper[0] == -1:
+            upper = lower
+
+        middle, noSkipsInbetween = self.__bottom_up_range_Max(i+1, j-1)
 
         queryHolds = lower[0] >= upper[0] and upper[0] > middle
 
         if not queryHolds:
             return "false"
-        elif noSkips:
+        elif isLowerAndUpperKnown and noSkipsInbetween:
             return "true"
         else:
             return "maybe"
@@ -53,28 +62,28 @@ class SegmentTree():
             j //= 2
         return (s,noSkips)
 
+
 def findClosestSearch(arr: list, x, findFloor: bool):
-    l = 0
-    r = len(arr)-1
+    lowerBound = 0
+    higherBound = len(arr)-1
+    
+    if x > arr[higherBound-1]:
+        return arr[higherBound]
+    if x < arr[lowerBound+1]:
+        return arr[lowerBound]
 
-    if x > arr[r]:
-        return arr[r]
-    if x < arr[l]:
-        return arr[l]
-
-    while l < r:
-        mid = (l + 1) + r // 2
-        if arr[mid] == x:
+    while lowerBound <= higherBound: #Flips lower and higher
+        mid = lowerBound + (higherBound-lowerBound) // 2
+        if arr[mid] == x:   #will never happen
             return arr[mid]
         if arr[mid] < x:
-            l = mid + 1
+            lowerBound = mid + 1
         else:
-            r = mid - 1
-
-    if findFloor:
-        return arr[r]
+            higherBound = mid - 1
+    if findFloor: #higher and lower are fliped at the end.
+        return arr[higherBound]
     else:
-        return arr[l]
+        return arr[lowerBound]
 
 
 
@@ -83,64 +92,71 @@ while True:
     if n == 0:
         exit()
     
-    bsArray =  [0] * n
-    rainArray = [-1] * (n*2)
+    bsArray =  [0] * (n)
+    rainArray = [-1] * ((n*2)+2)
     dYearsIndexes = dict()
-    nSkips = 0
-
-    #First Year
-    fYear, fRain = map(int, input().split())
-    lastYear = fYear
-    bsArray[0] = fYear
-    rainArray[0] = fRain
-    dYearsIndexes.update({fYear: 0})
+    nSkips = 0 #starts with a skip
 
     #Reading Years and info
+    fYear, fRain = map(int, input().split())
+    bsArray[0] = fYear
+    rainArray[1] = fRain #We make room for a skip
+    dYearsIndexes.update({fYear: 1})
+    lastYear = fYear
     for i in range(n-1):
         iYear, iRain = map(int, input().split())
-        
-        bsArray[i+1] = iYear
-        
+        bsArray[i+1] = iYear #+1 because of first read
         if lastYear != iYear-1:
             nSkips += 1
-            rainArray[i+1+nSkips] = iRain
-            dYearsIndexes.update({iYear: i+1+nSkips})
-        else:
-            rainArray[i+1] = iRain
-            dYearsIndexes.update({iYear: i+1})
-
+        rainArray[i+2+nSkips] = iRain #+2 because of first read and first skip
+        dYearsIndexes.update({iYear: i+2+nSkips})
         lastYear = iYear
 
-    sgTree = SegmentTree(nSkips+n)
-    for x in range(nSkips+n):
-        sgTree.update(x, rainArray[x])
+    #Update SegmentTree based on rain data
+    sgTree = SegmentTree(nSkips+n+2)
+    for xx in range(nSkips+n+2):
+        sgTree.update(xx, rainArray[xx])
 
-
+    #Search through 
     m = int(input())
     for _ in range(m):
-        y, x = map(int, input().split())
+        startYear, endYear = map(int, input().split())
+        startYearIndex = -1
+        endYearIndex = -1
 
-        if y<bsArray[0] and x>bsArray[-1]:
-            print("maybe")
-            continue
-        
-        if y not in dYearsIndexes:
-            y = dYearsIndexes.get(findClosestSearch(bsArray, y, False))
-        else: 
-            y = dYearsIndexes.get(y)
-        
-        if x not in dYearsIndexes:
-            x = dYearsIndexes.get(findClosestSearch(bsArray, x, True))
-        else: 
-            x = dYearsIndexes.get(x)
-
-        if x==y:
+        if startYear > bsArray[-1] or endYear < bsArray[0]:
             print("maybe")
             continue
 
-        print(sgTree.query(y,x))
+        if startYear not in dYearsIndexes:
+            if startYear < bsArray[0]:
+                startYearIndex = 0
+            else:
+                startYearIndex = dYearsIndexes.get(findClosestSearch(bsArray, startYear, False))-1
+        else: 
+            startYearIndex = dYearsIndexes.get(startYear)
+        
+        
+        if endYear not in dYearsIndexes:
+            if endYear > bsArray[-1]:
+                endYearIndex = nSkips+n+1
+            endYearIndex = dYearsIndexes.get(findClosestSearch(bsArray, endYear, True))+1
+        else: 
+            endYearIndex = dYearsIndexes.get(endYear)
 
-    print("")
+
+        # if startYear==-1000000000 and endYear ==1000000000:
+        #     print("##############")
+        #     print(bsArray)
+        #     print(rainArray)
+        #     print(dYearsIndexes)
+        #     print(f"{findClosestSearch(bsArray, startYear, False)}, {findClosestSearch(bsArray, endYear, True)}")
+        #     print(f"{startYearIndex}, {endYearIndex}")
+
+        
+        print(sgTree.query(startYearIndex,endYearIndex))
+
+    print("") #print empty line
     input()
 
 
