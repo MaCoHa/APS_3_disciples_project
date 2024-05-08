@@ -145,13 +145,23 @@ while True:
             endYearIndex = dYearsIndexes.get(endYear)
 
 
-        # if startYear==-1000000000 and endYear ==1000000000:
+        # if startYear==-944600985 and endYear ==-736167351:
         #     print("##############")
         #     print(bsArray)
         #     print(rainArray)
-        #     print(dYearsIndexes)
+        #     #print(dYearsIndexes)
         #     print(f"{findClosestSearch(bsArray, startYear, False)}, {findClosestSearch(bsArray, endYear, True)}")
         #     print(f"{startYearIndex}, {endYearIndex}")
+
+        #     max_ = 0
+        #     mIndex = 0
+
+        #     for x in range(endYearIndex-startYearIndex):
+        #         if rainArray[x+startYearIndex] > max_:
+        #             #print(rainArray[x+startYearIndex])
+        #             max_ = rainArray[x+startYearIndex]
+        #             mIndex = x+startYearIndex
+        #     print(f"index:{mIndex}, max:{max_}")
 
         
         print(sgTree.query(startYearIndex,endYearIndex))
