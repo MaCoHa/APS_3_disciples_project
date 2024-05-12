@@ -74,7 +74,7 @@ def findClosestSearch(arr: list, x, findFloor: bool):
 
     while lowerBound <= higherBound: #Flips lower and higher
         mid = lowerBound + (higherBound-lowerBound) // 2
-        if arr[mid] == x:   #will never happen
+        if arr[mid] == x:   #propperly will never happen
             return arr[mid]
         if arr[mid] < x:
             lowerBound = mid + 1

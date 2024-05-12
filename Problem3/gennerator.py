@@ -28,29 +28,7 @@ def printQueryToFile(n:int, s:str, lst: list):
 
 def createResults(lst:list):
     result = list()
-    for x in range(len(lst)):
-        start_ = lst[x][1]
-        for y in range(len(lst)-x-1):
-            end_ = lst[x+y+1][1]
-            max_ = 0 
-            gap = lst[x][0] != lst[y+1][0]-1
-            previous = lst[x][0]
-            for z in range(y-x):
-                v = lst[x+z+1][1]
-                if v > max_:
-                    max_ = v
-                if previous+1 != lst[x+z+1][0] and not gap:
-                    gap = True
-                if not gap:
-                    previous += 1
-
-            if start_ >= end_ and end_>max_:
-                if gap:
-                    result.append("maybe")
-                else:
-                    result.append("true")
-            else:
-                result.append("false")
+    #TODO get a solution from the internet
     return result
 
 def printAnswerToFile(lst:list, s:str):
