@@ -9,13 +9,14 @@ h[0] = ord(text[0])
 p[0] = 1
 
 
-A = 911382323
-B = 2**63 - 1
+A = 200
+B = 2**53 - 1
 
 for i in range(1,len(text)):    
     h[i] = (h[i-1]*A + ord(text[i])) % B
     p[i] = (p[i-1]*A) % B
     
+
 
 
 for i in range(n):
