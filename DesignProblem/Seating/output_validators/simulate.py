@@ -96,11 +96,11 @@ with open(sys.argv[1]) as in_file, open(sys.argv[2]) as ans_file:
     
     if len(answer) != int(first_line[1]) + 1:
         fail("Invalid number of lines")
-        
     if jury_answer[0].split()[1] != first_line[1]:
         fail("Incorrent flow level")
-    
+    guards = 0
     for line in answer[1:]:
+        guards += 1
         if re.match("(0|[1-9][0-9]*) (0|[1-9][0-9]*)", line) == None:
             fail("Invalid line")
         x, y = map(int, line.split())
@@ -117,6 +117,8 @@ with open(sys.argv[1]) as in_file, open(sys.argv[2]) as ans_file:
         if (x, y) not in graph:
             fail("Can not place gaurd outside stadium")
         graph.pop((x, y))
+    if guards != int(first_line[1]):
+        fail("Invalid number of guards")
     if bfs(graph, source, sink):
         fail("Fans can still reach the sink")
         

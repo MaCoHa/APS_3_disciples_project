@@ -1,0 +1,62 @@
+maybe <- start of -3
+maybe
+false
+false
+false
+false
+maybe
+maybe
+false
+maybe
+maybe 
+true   <- start of -1
+false
+false
+true
+maybe
+maybe 
+maybe
+false
+false
+true <- start of 0
+true
+false
+false
+false
+false
+false
+false
+false <- start of 1
+false
+false
+false
+false
+false
+false
+false <- start of 2
+false
+false
+false
+false
+false
+maybe <- start of 3
+maybe
+false
+false
+false
+maybe <- start of 4
+maybe
+maybe
+maybe
+maybe <- start of 5
+maybe
+maybe
+true <- start of 6
+false
+maybe <- start of 7
+maybe <- start of 8
+
+maybe
+maybe
+maybe
+maybe
