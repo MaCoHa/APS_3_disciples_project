@@ -128,24 +128,23 @@ def flow(graph, src,dest):
             
 currentFlow, newGraph, seen = flow(graph,source,sink)
 queue = [source]
-minCut = set()
-counter = 0
-seen_nodes = set()
+visited = set()
 while queue:
-    
-    node = queue.pop(0)
+    u = queue.pop()
+    visited.add(u)
+    for v,cap in newGraph[u].items():
+        if cap > 0 and v not in visited:
+            queue.append(v)
 
-    for neighbor in newGraph[node]:
-        if neighbor == (18, 5, 1):
-            print(node, neighbor)
-            print(newGraph[node][neighbor])
-            
-        if neighbor not in seen and newGraph[node][neighbor] == 0:
-            #print(node, newGraph[node][neighbor])
-            minCut.add((neighbor[0], neighbor[1]))
-        elif neighbor not in seen_nodes:
-            queue.append(neighbor)
-    seen_nodes.add(node)
+minCut = set()
+for u in visited:
+    for v,cap in newGraph[u].items():
+        if v not in visited and cap == 0:
+            if u[2] == IN:    
+                if u[0] == v[0] and u[1] == v[1]:
+                    minCut.add((v[0],v[1]))
+            else:
+                minCut.add((v[0],v[1]))
 
 #print(seen)
 print("F", currentFlow)

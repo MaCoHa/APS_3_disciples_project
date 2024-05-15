@@ -136,15 +136,12 @@ while queue:
     node = queue.pop(0)
 
     for neighbor in newGraph[node]:
-        if neighbor == (4, 4, 1):
-            print(newGraph[node])
         if neighbor not in seen:
             minCut.add(neighbor)
         elif neighbor not in seen_nodes:
             queue.append(neighbor)
     seen_nodes.add(node)
 
-print(seen)
 print("F", currentFlow)
 for node in minCut:
     print(node[0], node[1])

@@ -45,12 +45,10 @@ def dfs(graph,u,dest,mincap,seen=set()):
         return (False,seen)
     seen.add(u)
     for v,cap in graph[u].items():
-        print(u,v,cap, mincap)
         if cap > mincap:
             if v == dest:
                 return (True,[(u,v)])
             suc,p = dfs(graph,v,dest,mincap,seen)
-            print(suc)
             if suc:
                 p.append((u,v))
                 return (True,p)
@@ -68,7 +66,6 @@ def flow(orggraph, src,dest):
     mincap = maxcapacity
     while True:
         ispath, p_or_seen = dfs(graph,src,dest,mincap)
-        print(ispath, p_or_seen)
         if not ispath:
             if mincap > 0:
                 mincap = mincap // 2
@@ -88,7 +85,6 @@ def flow(orggraph, src,dest):
             graph[v][u] += saturation
 
 currentFlow, newGraph, seen = flow(graph, source, sink)
-print(currentFlow, newGraph, seen)
 queue = [source]
 minCut = set()
 while queue:
