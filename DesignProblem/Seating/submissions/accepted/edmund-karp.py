@@ -5,7 +5,7 @@ IN = 0
 OUT = 1
 source = "source"
 sink = "sink"
-maxcapacity = 10
+maxcapacity = 8
 
 w, h = map(int, next(stdin).split())
 graph = defaultdict(lambda: defaultdict(int))
@@ -14,12 +14,12 @@ for y_cord in range(h):
     lst = next(stdin).split()
     for x_cord, j in enumerate(lst):
         if j == "I":
-            graph[source][(x_cord, y_cord, OUT)] = maxcapacity
+            graph[source][(x_cord, y_cord, OUT)] = maxcapacity+1
         elif j == "S":
             graph[(x_cord, y_cord, IN)][sink] = maxcapacity
         if j != "H":
             if j != "S" and j != "I":
-                graph[(x_cord, y_cord, IN)][(x_cord, y_cord, OUT)] = maxcapacity if j == "I" or j == "S" else 1
+                graph[(x_cord, y_cord, IN)][(x_cord, y_cord, OUT)] = 1
             for i in range(-1, 2):
                 for j in range(-1, 2):
                     new_x_cord = x_cord + i
