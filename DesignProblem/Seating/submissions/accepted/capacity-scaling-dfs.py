@@ -13,7 +13,8 @@ w, h = map(int, next(stdin).split())
 graph = defaultdict(lambda: defaultdict(int))
 
 for y_cord in range(h):
-    lst = next(stdin).split()
+    l = next(stdin)
+    lst = l.split()
     for x_cord, j in enumerate(lst):
         if j == "I":
             graph[source][(x_cord, y_cord, OUT)] = maxcapacity
