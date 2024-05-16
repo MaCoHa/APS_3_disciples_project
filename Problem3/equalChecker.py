@@ -15,9 +15,6 @@ cal_ = loadFileInArray("3.cal")
 
 file1 = open("3.dif", "w")
 print(len(ans_))
-print((ans_[0]))
-print((ans_[1]))
-print((ans_[2]))
 print(len(cal_))
 for x in range(len(ans_)):
     if ans_[x] != cal_[x]:

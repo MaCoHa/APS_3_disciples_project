@@ -41,12 +41,12 @@ def printAnswerToFile(lst:list, s:str):
 lst = list()
 max_ = int(math.pow(10,9))
 min_ = -1*max_
-n_ = 20
+n_ = 100
 
 sort1 = getInputList(n=n_, max=max_, min=min_)
 printQueryToFile(n_, "3.in", sort1)
-res1 = createResults(sort1)
-printAnswerToFile(res1, "3.ans")
+#res1 = createResults(sort1)
+#printAnswerToFile(res1, "3.ans")
 
 # lst = list()
 # n_ = 20
