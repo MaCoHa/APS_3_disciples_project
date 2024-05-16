@@ -16,15 +16,15 @@ graph = defaultdict(lambda: defaultdict(int))
 for y_cord in range(h):
     lst = next(stdin).split()
     for x_cord, j in enumerate(lst):
-        if j == "I":
+        if j == "B":
             graph[source][(x_cord, y_cord, IN)] = maxcap
-        elif j == "S":
+        elif j == "F":
             graph[(x_cord, y_cord, IN)][sink] = maxcap
             #graph[(x_cord, y_cord, IN)][(x_cord, y_cord, OUT)] = maxcap
 
         if j != "H":
-            if j != "S":
-                graph[(x_cord, y_cord, IN)][(x_cord, y_cord, OUT)] = maxcap if j == "I" or j == "S" else 1
+            if j != "F":
+                graph[(x_cord, y_cord, IN)][(x_cord, y_cord, OUT)] = maxcap if j == "B" or j == "F" else 1
             for i in range(-1, 2):
                 for j in range(-1, 2):
                     new_x_cord = x_cord + i
@@ -142,6 +142,6 @@ while queue:
             queue.append(neighbor)
     seen_nodes.add(node)
 
-print("F", currentFlow)
+print("G", currentFlow)
 for node in minCut:
     print(node[0], node[1])

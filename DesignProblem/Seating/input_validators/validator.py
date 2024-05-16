@@ -17,12 +17,12 @@ try:
         assert len(line) == w
         y = 0
         for char in line:
-            assert char in ["0", "S", "I", "H"]
+            assert char in ["0", "F", "B", "H"]
             if char == "0":
                 free += 1
-            elif char == "S":
+            elif char == "F":
                 sinks.add((x, y))
-            elif char == "I":
+            elif char == "B":
                 sources.add((x, y))
             y += 1
         x += 1
