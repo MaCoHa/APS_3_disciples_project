@@ -22,14 +22,14 @@ for y_cord in range(h):
     list = (next(stdin).split())
     for x_cord, j in enumerate(list):
         #print(x_cord,y_cord,j)
-        if (j == "I"):
+        if (j == "B"):
             graph[source][(x_cord,y_cord, IN)] = maxcap
             
-        elif (j == "S"):
+        elif (j == "F"):
             graph[(x_cord,y_cord,IN)][sink] = maxcap
            
         if (j != "H"):
-             graph[(x_cord,y_cord,IN)][(x_cord,y_cord,OUT)] = maxcap if j == "I" or j == "S" else 1
+             graph[(x_cord,y_cord,IN)][(x_cord,y_cord,OUT)] = maxcap if j == "B" or j == "F" else 1
              for i in range(-1,2):
                 #print(i)
                 for j in range(-1,2):

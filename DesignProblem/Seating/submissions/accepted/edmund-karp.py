@@ -13,12 +13,12 @@ graph = defaultdict(lambda: defaultdict(int))
 for y_cord in range(h):
     lst = next(stdin).split()
     for x_cord, j in enumerate(lst):
-        if j == "I":
+        if j == "B":
             graph[source][(x_cord, y_cord, OUT)] = maxcapacity+1
-        elif j == "S":
+        elif j == "F":
             graph[(x_cord, y_cord, IN)][sink] = maxcapacity
         if j != "H":
-            if j != "S" and j != "I":
+            if j != "F" and j != "B":
                 graph[(x_cord, y_cord, IN)][(x_cord, y_cord, OUT)] = 1
             for i in range(-1, 2):
                 for j in range(-1, 2):
@@ -73,6 +73,6 @@ def augment(graph, path, flow):
 
 totalFlow, minCut = flow(graph, source, sink)
 
-print("F", totalFlow)
+print("G", totalFlow)
 for x, y in minCut:
     print(x, y)

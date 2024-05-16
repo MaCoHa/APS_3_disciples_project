@@ -2,20 +2,20 @@ import random
 import sys
 
 def generate_matrix(x, y):
-    matrix = [[random.choice(['0', 'I', 'H', 'S']) for _ in range(x)] for _ in range(y)]
+    matrix = [[random.choice(['0', 'B', 'H', 'F']) for _ in range(x)] for _ in range(y)]
 
     # Ensure that I and S are not adjacent horizontally, vertically, or diagonally
     for i in range(y):
         for j in range(x):
-            if matrix[i][j] == 'I':
+            if matrix[i][j] == 'B':
                 for dx in [-1, 0, 1]:
                     for dy in [-1, 0, 1]:
-                        if (0 <= j+dx < x) and (0 <= i+dy < y) and matrix[i+dy][j+dx] == 'S':
+                        if (0 <= j+dx < x) and (0 <= i+dy < y) and matrix[i+dy][j+dx] == 'F':
                             matrix[i][j] = '0'
-            elif matrix[i][j] == 'S':
+            elif matrix[i][j] == 'F':
                 for dx in [-1, 0, 1]:
                     for dy in [-1, 0, 1]:
-                        if (0 <= j+dx < x) and (0 <= i+dy < y) and matrix[i+dy][j+dx] == 'I':
+                        if (0 <= j+dx < x) and (0 <= i+dy < y) and matrix[i+dy][j+dx] == 'B':
                             matrix[i][j] = '0'
 
     return matrix

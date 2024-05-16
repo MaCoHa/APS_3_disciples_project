@@ -72,9 +72,9 @@ with open(sys.argv[1]) as in_file, open(sys.argv[2]) as ans_file:
     stadium = [l.split() for l in in_file.readlines()[1:]]
     for y in range(len(stadium)):
         for x in range(len(stadium[y])):
-            if stadium[y][x] == "I":
+            if stadium[y][x] == "B":
                 graph[source][(x, y)] = maxcap
-            elif stadium[y][x] == "S":
+            elif stadium[y][x] == "F":
                 graph[(x, y)][sink] = maxcap
             if stadium[y][x] != "H":
                 for i in range(-1, 2):
@@ -91,7 +91,7 @@ with open(sys.argv[1]) as in_file, open(sys.argv[2]) as ans_file:
         fail("Output can not be empty")
     jury_answer = ans_file.readlines()
     first_line = answer[0].split()
-    if len(first_line) != 2 or first_line[0] != "F":
+    if len(first_line) != 2 or first_line[0] != "G":
         fail("Invalid first line")
     
     if len(answer) != int(first_line[1]) + 1:
@@ -106,9 +106,9 @@ with open(sys.argv[1]) as in_file, open(sys.argv[2]) as ans_file:
         x, y = map(int, line.split())
         if stadium[y][x] == "H":
             fail("Can not place gaurd at a wall")
-        if stadium[y][x] == "I":
+        if stadium[y][x] == "B":
             fail("Can not place gaurd at a source")
-        if stadium[y][x] == "S":
+        if stadium[y][x] == "F":
             fail("Can not place gaurd at a sink")
         if (x, y) in graph[source]:
             fail("Can not place gaurd at a source")

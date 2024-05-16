@@ -21,14 +21,14 @@ for y_cord in range(h):
     list = (next(stdin).split())
     for x_cord, j in enumerate(list):
         #print(x_cord,y_cord,j)
-        if (j == "I"):
+        if (j == "B"):
             graph[source][(x_cord,y_cord, OUT)] = maxcap+1
             
-        elif (j == "S"):
+        elif (j == "F"):
             graph[(x_cord,y_cord,IN)][sink] = maxcap
            
         if (j != "H"):
-            if j != "S" and j != "I":
+            if j != "F" and j != "B":
                 graph[(x_cord, y_cord, IN)][(x_cord, y_cord, OUT)] = 1
             for i in range(-1,2):
                 #print(i)
@@ -101,6 +101,6 @@ while queue:
         else:
             queue.append(neighbor)
         
-print("F", currentFlow)
+print("G", currentFlow)
 for node in minCut:
     print(node[0], node[1])
