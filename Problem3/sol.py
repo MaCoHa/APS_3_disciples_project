@@ -1,6 +1,7 @@
 #https://open.kattis.com/problems/worstweather?tab=metadata
 
 import math
+import sys
 
 class SegmentTree():
     def __init__(self, n):
@@ -67,9 +68,9 @@ def findClosestSearch(arr: list, x, findFloor: bool):
     lowerBound = 0
     higherBound = len(arr)-1
     
-    if x > arr[higherBound-1]:
+    if x > arr[higherBound]:
         return arr[higherBound]
-    if x < arr[lowerBound+1]:
+    if x < arr[lowerBound]:
         return arr[lowerBound]
 
     while lowerBound <= higherBound: #Flips lower and higher
@@ -81,14 +82,20 @@ def findClosestSearch(arr: list, x, findFloor: bool):
         else:
             higherBound = mid - 1
     if findFloor: #higher and lower are fliped at the end.
-        return arr[higherBound]
+        if arr[higherBound] < x:
+            return arr[higherBound]
+        else:
+            return arr[min(higherBound-1,0)]
     else:
-        return arr[lowerBound]
+        if arr[lowerBound] > x:
+            return arr[lowerBound]
+        else:
+            return arr[max(lowerBound+1,len(arr)-1)]
 
 
 
 while True:
-    n = int(input())
+    n = int(sys.stdin.readline())
     if n == 0:
         exit()
     
@@ -98,13 +105,13 @@ while True:
     nSkips = 0 #starts with a skip
 
     #Reading Years and info
-    fYear, fRain = map(int, input().split())
+    fYear, fRain = map(int, sys.stdin.readline().split())
     bsArray[0] = fYear
     rainArray[1] = fRain #We make room for a skip
     dYearsIndexes.update({fYear: 1})
     lastYear = fYear
     for i in range(n-1):
-        iYear, iRain = map(int, input().split())
+        iYear, iRain = map(int, sys.stdin.readline().split())
         bsArray[i+1] = iYear #+1 because of first read
         if lastYear != iYear-1:
             nSkips += 1
@@ -118,9 +125,9 @@ while True:
         sgTree.update(xx, rainArray[xx])
 
     #Search through 
-    m = int(input())
+    m = int(sys.stdin.readline())
     for _ in range(m):
-        startYear, endYear = map(int, input().split())
+        startYear, endYear = map(int, sys.stdin.readline().split())
         startYearIndex = -1
         endYearIndex = -1
 
@@ -143,31 +150,11 @@ while True:
             endYearIndex = dYearsIndexes.get(findClosestSearch(bsArray, endYear, True))+1
         else: 
             endYearIndex = dYearsIndexes.get(endYear)
-
-
-        # if startYear==-944600985 and endYear ==-736167351:
-        #     print("##############")
-        #     print(bsArray)
-        #     print(rainArray)
-        #     #print(dYearsIndexes)
-        #     print(f"{findClosestSearch(bsArray, startYear, False)}, {findClosestSearch(bsArray, endYear, True)}")
-        #     print(f"{startYearIndex}, {endYearIndex}")
-
-        #     max_ = 0
-        #     mIndex = 0
-
-        #     for x in range(endYearIndex-startYearIndex):
-        #         if rainArray[x+startYearIndex] > max_:
-        #             #print(rainArray[x+startYearIndex])
-        #             max_ = rainArray[x+startYearIndex]
-        #             mIndex = x+startYearIndex
-        #     print(f"index:{mIndex}, max:{max_}")
-
         
         print(sgTree.query(startYearIndex,endYearIndex))
 
     print("") #print empty line
-    input()
+    sys.stdin.readline()
 
 
 

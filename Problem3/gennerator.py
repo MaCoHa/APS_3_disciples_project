@@ -1,12 +1,28 @@
 import random
 import math
 
-def getInputList(n: int, max: int, min: int):
+def getInputListRandom(n: int, max: int, min: int):
     lst = list()
     for i in range(n):
         year = random.randint(min, max)
         rain = random.randint(i*100, max)
         lst.append((year, rain))
+    
+    l2 = sorted(lst, key=lambda tup: tup[0])
+    return l2
+
+def getInputListOrders(n: int, max_value: int, min_value: int):
+    lst = list()
+    start = int(n/2)*(-1)
+    for i in range(n):
+        rain = random.randint(min(i*100,(max_value-100)), max_value)
+        lst.append((start, rain))
+
+        chance = random.randint(1, 100)
+        if chance > 95:
+            start += 10
+        else:
+            start += 1
     
     l2 = sorted(lst, key=lambda tup: tup[0])
     return l2
@@ -38,22 +54,20 @@ def printAnswerToFile(lst:list, s:str):
     file.close()
     
 
-lst = list()
 max_ = int(math.pow(10,9))
 min_ = -1*max_
 n_ = 100
 
-sort1 = getInputList(n=n_, max=max_, min=min_)
-printQueryToFile(n_, "3.in", sort1)
-#res1 = createResults(sort1)
-#printAnswerToFile(res1, "3.ans")
+#sort1 = getInputListRandom(n=n_, max=max_, min=min_)
+#printQueryToFile(n_, "3.in", sort1)
+# #res1 = createResults(sort1)
+# #printAnswerToFile(res1, "3.ans")
 
-# lst = list()
-# n_ = 20
-# sort2 = getInputList(n=n_, max=max_, min=min_)
-# printQueryToFile(n_, "4.in", sort2)
-# res2 = createResults(sort2)
-# printAnswerToFile(res2, "4.ans")
+n2_ = 20
+sort2 = getInputListOrders(n=n2_, max_value=max_, min_value=min_)
+printQueryToFile(n2_, "4.in", sort2)
+# # res2 = createResults(sort2)
+# # printAnswerToFile(res2, "4.ans")
 
 
 
