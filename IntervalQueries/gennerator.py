@@ -41,33 +41,19 @@ def printQueryToFile(n:int, s:str, lst: list):
     file.write("0\n")
     file.write("0\n")
     file.close()
-
-def createResults(lst:list):
-    result = list()
-    #TODO get a solution from the internet
-    return result
-
-def printAnswerToFile(lst:list, s:str):
-    file = open(s, "w") 
-    for x in lst:
-        file.write(f"{x}\n")
-    file.close()
     
 
 max_ = int(math.pow(10,9))
 min_ = -1*max_
 n_ = 100
+sort1 = getInputListRandom(n=n_, max=max_, min=min_)
+printQueryToFile(n_, "3.in", sort1)
 
-#sort1 = getInputListRandom(n=n_, max=max_, min=min_)
-#printQueryToFile(n_, "3.in", sort1)
-# #res1 = createResults(sort1)
-# #printAnswerToFile(res1, "3.ans")
 
 n2_ = 20
 sort2 = getInputListOrders(n=n2_, max_value=max_, min_value=min_)
 printQueryToFile(n2_, "4.in", sort2)
-# # res2 = createResults(sort2)
-# # printAnswerToFile(res2, "4.ans")
+
 
 
 
