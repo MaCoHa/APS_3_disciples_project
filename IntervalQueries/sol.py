@@ -2,6 +2,7 @@
 
 import math
 import sys
+import time
 
 class SegmentTree():
     def __init__(self, n):
@@ -109,9 +110,11 @@ def findClosestSearch(arr: list, x, findFloor: bool):
             return arr[max(lowerBound+1,len(arr)-1)]
 
 
+#startTime = time.time() #for time taking
 while True:
     n = int(sys.stdin.readline())
     if n == 0:
+        #print("--- %s seconds ---" % (time.time() - startTime)) #for time taking
         exit()
     
     binarysearchArray =  [0] * (n)
@@ -162,6 +165,7 @@ while True:
         
         #Prints the result of query
         print(sgTree.query(startYearIndex,endYearIndex))
+        #sgTree.query(startYearIndex,endYearIndex) #for time taking
 
     print("") #print empty line
     sys.stdin.readline()
