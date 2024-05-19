@@ -1,9 +1,0 @@
-https://open.kattis.com/problems/presidentialelections?tab=metadata
-
-
-We would like to get a victory by convincing as few people as possible to vote for you
-
-[(0, 6, 6.0), (50, 2, 0.0392156862745098)]
-
-
-opt(i) = min()

@@ -1,6 +1,6 @@
+#!/usr/bin/env python3
 from collections import defaultdict
 from sys import stdin
-import time
 
 IN = 0
 OUT = 1

@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 from collections import defaultdict
 from sys import stdin
 from itertools import combinations
@@ -62,10 +63,10 @@ def BFS(graph, s,t, removedNodes):
 pathFound = True
 while pathFound or k >= len(possible_gaurd_places):
     for combies in combinations(possible_gaurd_places, k):
-        removedNodes = []
+        removedNodes = set()
         for comb in combies:
-            removedNodes.append((comb[0],comb[1],IN))
-            removedNodes.append((comb[0],comb[1],OUT))
+            removedNodes.add((comb[0],comb[1],IN))
+            removedNodes.add((comb[0],comb[1],OUT))
         pathFound = BFS(graph, source, sink, removedNodes)
         if not pathFound:
             print("G",k)

@@ -1,35 +1,42 @@
-\problemname{The Legend of the Scrollbar}
+\problemname{Fending off fanatical football fans}
 
 
 \illustration{.33}{img/cover_image.png}{Fending off fanatical football fans}
 
+\noindent
 The atmosphere is buzzing outside the stadium as the two top football teams and their fans find their
 way into the arena. This is going to be a heated and important match for the end of the season
 standings, with both teams bringing their strongest lineup and busloads of their most fanatical fans.
 
+
+\noindent
 As the head of security, you have chosen specific stands to keep the two die-hard fan bases apart,
 as they are known for their physical altercations. Their stands are located on opposite sides of the
 stadium, with a section for casual football fans in between. However, as fans take to their respective
 stands a clear problem emerges, both teams brought too many fans for their respective sections.
 
+\noindent
 The fans are furious since they paid premium to be able to cheer with their fellow fanatical fans.
 To calm the fans and reduce refunds the excess of fanatical fans are seated in the casual section, with
-free seating choice, regardless of how detrimental it is for security.
+free seating choice, regardless of how detrimental it is for security. You have been instructed to place
+security gaurds on seats to seperate the fans but you don't want to waste using too many security guards.
 
+\noindent
 Your job as head of security is now to use the pillars in the stands and as few guards as possi-
-ble, to separate all fans of club B from all fans of club F. This is achieved if it is impossible to find a
+ble, to separate all fans of club $B$ from all fans of club $F$. This is achieved if it is impossible to find a
 path, with horizontal, vertical, and diagonal movement, from one fan type to another.
 
 \section*{Input}
 
-The first line is the size of the stands in number of columns (C) and rows (R) both integers, with $C,R <= 30$.
-Followed by R lines of C characters, describing the seating arrangements, with characters 
-in a row being separated by whitespace. There are 4 different characters: $‘F’$ \& $‘B’$ indicating a seated 
-fan of type F or B, $‘H’$ an impassable wall and $‘0’$ a free seat to put a guard.
+The first line is the size of the stands in number of columns $C$ and rows $R$, with $2 <= C,R <= 30$.
+Followed by $R$ lines of $C$ characters, describing the seating arrangements, with characters 
+in a row being separated by whitespace. There are four different characters: $F$ \& $B$ indicating a seated 
+fan of type $F$ or $B$, $H$ an impassable pillar and $0$ a free seat to put a guard.
+A $F$ and $B$ are never placed next to each other. There is at least one $F$, one $B$ and one $0$.
 
 \section*{Output}
 
-The first line of your output should be “G N”, where N is the number of required guards. Followed 
-by N lines each describing the placement of a guard, with the two integers “X Y”, X being the row 
-position and Y being the column position of the guard. $0 <= X < R$, $0 <= Y < C$.The order of the 
+The first line of your output should be in the “G N” format, where N is replaced with the number of required guards.
+Followed by N lines each describing the placement of a guard on a free seat ("0" character), with the two integers “X Y”, X being the row 
+position and Y being the column position of the guard. $0 <= X < R$, $0 <= Y < C$. The order of the 
 guard positions doesn't matter.
