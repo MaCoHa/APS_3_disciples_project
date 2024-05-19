@@ -1,25 +1,35 @@
 \problemname{The Legend of the Scrollbar}
 
 
-\illustration{.33}{img/cover_image.png}{3 guys in Scrollbar}
+\illustration{.33}{img/cover_image.png}{Fending off fanatical football fans}
 
+The atmosphere is buzzing outside the stadium as the two top football teams and their fans find their
+way into the arena. This is going to be a heated and important match for the end of the season
+standings, with both teams bringing their strongest lineup and busloads of their most fanatical fans.
 
-In the bustling halls of ITU, where minds meld with code, 
-lies the Scrollbar, a haven for weary students. 
-There, amidst the hum of algorithms and the buzz of ideas, 
-whispers abound of a legendary drink—crafted with care and 
-brewed with brilliance—where every sip is a journey into 
-mathematical ecstasy, a concoction revered as the elixir 
-of the Scrollbar, where every drop heralds a triumph of taste and thrift.
+As the head of security, you have chosen specific stands to keep the two die-hard fan bases apart,
+as they are known for their physical altercations. Their stands are located on opposite sides of the
+stadium, with a section for casual football fans in between. However, as fans take to their respective
+stands a clear problem emerges, both teams brought too many fans for their respective sections.
 
-Three students adjourn to find the drink where they can get the most alcohol
-for the lowest amount of money
+The fans are furious since they paid premium to be able to cheer with their fellow fanatical fans.
+To calm the fans and reduce refunds the excess of fanatical fans are seated in the casual section, with
+free seating choice, regardless of how detrimental it is for security.
+
+Your job as head of security is now to use the pillars in the stands and as few guards as possi-
+ble, to separate all fans of club B from all fans of club F. This is achieved if it is impossible to find a
+path, with horizontal, vertical, and diagonal movement, from one fan type to another.
 
 \section*{Input}
 
-The input consists of multiple line. The first line contains the number $n$, $0 < n <= 100$, the number of drinks at the ITU bar.
-The following $n$ line consists of two integers $oh$ and $dk$, $oh$ indicates the number of alcoholic units in the drink, $0 <= oh$, $dk$ indicates the price in dansih crowns for the drink, $0 < dk$.
+The first line is the size of the stands in number of columns (C) and rows (R) both integers, with $C,R <= 30$.
+Followed by R lines of C characters, describing the seating arrangements, with characters 
+in a row being separated by whitespace. There are 4 different characters: $‘F’$ \& $‘B’$ indicating a seated 
+fan of type F or B, $‘H’$ an impassable wall and $‘0’$ a free seat to put a guard.
 
 \section*{Output}
 
-Output the index of the drink where they can get the most alcohol for the lowest amount of money.
+The first line of your output should be “G N”, where N is the number of required guards. Followed 
+by N lines each describing the placement of a guard, with the two integers “X Y”, X being the row 
+position and Y being the column position of the guard. $0 <= X < R$, $0 <= Y < C$.The order of the 
+guard positions doesn't matter.
