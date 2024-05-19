@@ -84,6 +84,6 @@ def printQueryToFile(s:str, lst: list):
 # printQueryToFile(n2_, "4.in", sort2)
 
 sortWorst = getWorstCase()
-printQueryToFile("worst.in", sortWorst)
+printQueryToFile("worst2.in", sortWorst)
 
 

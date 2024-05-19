@@ -117,7 +117,7 @@ while True:
         #print("--- %s seconds ---" % (time.time() - startTime)) #for time taking
         exit()
     
-    binarysearchArray =  [0] * (n)
+    searchArray =  [0] * (n)
     rainArray = [-1] * ((n*2)+1)
     dYearsIndexes = dict()
     nSkips = 0 
@@ -126,7 +126,7 @@ while True:
     #Reading Years and info
     for i in range(n):
         iYear, iRain = map(int, sys.stdin.readline().split())
-        binarysearchArray[i] = iYear
+        searchArray[i] = iYear
         if previousYear != iYear-1:
             nSkips += 1
         rainArray[i+nSkips] = iRain
@@ -136,6 +136,7 @@ while True:
     #Update SegmentTree based on rain data
     sgTree = SegmentTree(nSkips+n+1)
     for xx in range(nSkips+n+1):
+        #sgTree.update(xx, rainArray[xx]) #n log(n) build time.
         sgTree.set(xx, rainArray[xx])
     sgTree.updateAll()
 
@@ -147,19 +148,19 @@ while True:
         endYearIndex = -1
 
         #Checks if the hole range is outside the given data.
-        if startYear > binarysearchArray[-1] or endYear < binarysearchArray[0]:
+        if startYear > searchArray[-1] or endYear < searchArray[0]:
             print("maybe")
             continue
 
         #Finding index for startYear or the closes index we have data for. 
         if startYear not in dYearsIndexes:
-            startYearIndex = dYearsIndexes.get(findClosestSearch(binarysearchArray, startYear, False))-1
+            startYearIndex = dYearsIndexes.get(findClosestSearch(searchArray, startYear, False))-1
         else: 
             startYearIndex = dYearsIndexes.get(startYear)
         
         #Finding index for startYear or the closes index we have data for. 
         if endYear not in dYearsIndexes:
-            endYearIndex = dYearsIndexes.get(findClosestSearch(binarysearchArray, endYear, True))+1 #The +1 is the get the index of the skip where endyear belong
+            endYearIndex = dYearsIndexes.get(findClosestSearch(searchArray, endYear, True))+1 #The +1 is the get the index of the skip where endyear belong
         else: 
             endYearIndex = dYearsIndexes.get(endYear)
         
